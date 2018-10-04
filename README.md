@@ -1,4 +1,4 @@
-#Free-CPU-HotPlug
+# Free-CPU-HotPlug
 
 Qt application to manually manage cpu hot plug in linux OS (Debian)
 
