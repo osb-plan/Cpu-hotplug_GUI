@@ -8,3 +8,5 @@ $>./Free-CPU-HotPlug
 
 This source depends on qt libraries version > 4.9.
 
+
+
