@@ -17,7 +17,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
@@ -26,8 +26,8 @@ private slots:
     void on_actionExit_triggered();
 
     void on_btnCPU0on_clicked();
-   void on_btnCPU1on_clicked();
-   /* void on_btnCPU2on_clicked();
+    void on_btnCPU1on_clicked();
+    void on_btnCPU2on_clicked();
     void on_btnCPU3on_clicked();
     void on_btnCPU4on_clicked();
     void on_btnCPU5on_clicked();
@@ -40,11 +40,11 @@ private slots:
     void on_btnCPU12on_clicked();
     void on_btnCPU13on_clicked();
     void on_btnCPU14on_clicked();
-    void on_btnCPU15on_clicked();*/
+    void on_btnCPU15on_clicked();
 
     void on_btnCPU0off_clicked();
     void on_btnCPU1off_clicked();
-    /*void on_btnCPU2off_clicked();
+    void on_btnCPU2off_clicked();
     void on_btnCPU3off_clicked();
     void on_btnCPU4off_clicked();
     void on_btnCPU5off_clicked();
@@ -57,13 +57,7 @@ private slots:
     void on_btnCPU12off_clicked();
     void on_btnCPU13off_clicked();
     void on_btnCPU14off_clicked();
-    void on_btnCPU15off_clicked();*/
-
-
-
-
-
-
+    void on_btnCPU15off_clicked();
 
     void on_actionAbout_Hot_Plug_GUI_triggered();
 

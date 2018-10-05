@@ -142,9 +142,6 @@ void MainWindow::EnableComponents(QStringList list)
 void MainWindow::on_actionConfigure_triggered()
 {
 
-
-
-
     QProcess process;
     process.start("lscpu -e");
     process.waitForFinished(-1); // will wait forever until finished
@@ -161,7 +158,6 @@ void MainWindow::on_actionConfigure_triggered()
         if(i  > 0)
         {
             QString onoff;
-            qint16 cpu;
             QString str = list.at(i);
 
             if(str.contains("yes"))
@@ -174,16 +170,12 @@ void MainWindow::on_actionConfigure_triggered()
             //qDebug() << str.contains("no");
         }
     }
-    for(auto i = 0; i < MappingActiveCPU.length(); i++)
-    {
-        qDebug() << MappingActiveCPU.at(i);
-    }
     EnableComponents(list);
 
     if(MappingActiveCPU.length() <= 3 )
     {
 
-        qint8 idx = ui->tabWidget->indexOf(ui->tabCpu4);
+        int idx = ui->tabWidget->indexOf(ui->tabCpu4);
         ui->tabWidget->removeTab(idx);
         idx = ui->tabWidget->indexOf(ui->tabCpu8);
         ui->tabWidget->removeTab(idx);
@@ -192,24 +184,36 @@ void MainWindow::on_actionConfigure_triggered()
 
     }else if (MappingActiveCPU.length() <= 8 )
     {
-        qint8 idx = ui->tabWidget->indexOf(ui->tabCpu8);
+        int idx = ui->tabWidget->indexOf(ui->tabCpu8);
         ui->tabWidget->removeTab(idx);
         idx = ui->tabWidget->indexOf(ui->tabCpu12);
         ui->tabWidget->removeTab(idx);
 
     }else if (MappingActiveCPU.length() <= 12 )
     {
-        qint8 idx = ui->tabWidget->indexOf(ui->tabCpu12);
+        int idx = ui->tabWidget->indexOf(ui->tabCpu12);
         ui->tabWidget->removeTab(idx);
     }
 
     ui->tabWidget->setVisible(true);
+
+    ui->actionConfigure->setEnabled(false);
+
 }
 
 void MainWindow::on_actionExit_triggered()
 {
     this->close();
 }
+
+void MainWindow::on_actionAbout_Hot_Plug_GUI_triggered()
+{
+    Dialog *dialog = new Dialog;
+    dialog->setWindowTitle("Dialog");
+    dialog->show();
+}
+
+
 
 void MainWindow::on_btnCPU0on_clicked()
 {
@@ -228,6 +232,9 @@ void MainWindow::on_btnCPU0on_clicked()
 
     file.close();
 }
+
+
+
 
 void MainWindow::on_btnCPU0off_clicked()
 {
@@ -282,9 +289,524 @@ void MainWindow::on_btnCPU1off_clicked()
     file.close();
 }
 
-void MainWindow::on_actionAbout_Hot_Plug_GUI_triggered()
+
+/* CPU 2 */
+void MainWindow::on_btnCPU2on_clicked()
 {
-    Dialog *dialog = new Dialog;
-    dialog->setWindowTitle("Dialog");
-    dialog->show();
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu2/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU2off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu2/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+
+/* CPU 3 */
+void MainWindow::on_btnCPU3on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu3/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU3off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu3/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+/* CPU 4 */
+void MainWindow::on_btnCPU4on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu4/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU4off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu4/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+/* CPU 5 */
+void MainWindow::on_btnCPU5on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu5/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU5off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu5/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+/* CPU 6 */
+void MainWindow::on_btnCPU6on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu6/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU6off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu6/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+/* CPU 7 */
+void MainWindow::on_btnCPU7on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu7/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU7off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu7/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+
+
+/* CPU 8 */
+void MainWindow::on_btnCPU8on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu8/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU8off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu8/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+/* CPU 9 */
+void MainWindow::on_btnCPU9on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu9/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU9off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu9/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+/* CPU 10 */
+void MainWindow::on_btnCPU10on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu10/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU10off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu10/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+/* CPU 11 */
+void MainWindow::on_btnCPU11on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu11/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU11off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu11/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+/* CPU 12 */
+void MainWindow::on_btnCPU12on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu12/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU12off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu12/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+/* CPU 13 */
+void MainWindow::on_btnCPU13on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu13/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU13off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu13/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+/* CPU 14 */
+void MainWindow::on_btnCPU14on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu14/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU14off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu14/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
+}
+
+/* CPU 15 */
+void MainWindow::on_btnCPU15on_clicked()
+{
+    ui->btnCPU1on->setEnabled(false);
+    ui->btnCPU1off->setEnabled(true);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : green;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : grey;}");
+
+    QString filename = "/sys/devices/system/cpu/cpu15/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "1";
+    }else{
+
+    }
+
+    file.close();
+}
+
+void MainWindow::on_btnCPU15off_clicked()
+{
+    ui->btnCPU1on->setEnabled(true);
+    ui->btnCPU1off->setEnabled(false);
+
+    ui->lblCPU1on->setStyleSheet("QLabel { background-color : grey;}");
+    ui->lblCPU1off->setStyleSheet("QLabel { background-color : red;}");
+    QString filename = "/sys/devices/system/cpu/cpu15/online";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+        stream << "0";
+    }
+    file.close();
 }
