@@ -1,6 +1,7 @@
 # Free-CPU-HotPlug
 
 Qt application to manually manage cpu hot plug in linux OS (Debian 4.9.88-1+deb9u1)(Linux ubuntu)
+
 About the dependecies:
 
 1) >sudo apt-get install gcc g++ build-essential libgl-dev
