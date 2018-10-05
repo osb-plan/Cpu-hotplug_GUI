@@ -10,8 +10,8 @@ About the dependecies:
 To compile the application run:
 
 1) >qmake free_cpu_hotplug.pro
-
-2) >./Free-CPU-HotPlug
+2) >sudo su -
+3) >./Free-CPU-HotPlug
 
 
 
