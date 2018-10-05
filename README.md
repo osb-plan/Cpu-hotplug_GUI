@@ -1,6 +1,7 @@
 # Free-CPU-HotPlug
 
-Qt application to manually manage cpu hot plug in linux OS (Debian 4.9.88-1+deb9u1)(Linux ubuntu)
+Qt application to manually manage cpu hot plug in linux OS (Debian 4.9.88-1+deb9u1)(Linux ubuntu).
+It basically wrap the commend "lscpu -e".
 
 About the dependecies:
 
