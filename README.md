@@ -15,7 +15,7 @@ To compile the application run:
 2) >sudo su -
 3) >./Free-CPU-HotPlug.
 
-
+---
 
 
 
